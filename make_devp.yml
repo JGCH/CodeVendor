@@ -1,0 +1,30 @@
+version: '3.7'
+
+volumes:
+  db_codescript: {}
+
+services:
+  cs_db:
+    image: postgres:12.1
+    volumes:
+      - db_codescript:/var/lib/postgresql/data
+    env_file:
+      - ./build/environments/develop/database
+      - ./build/environments/develop/backend
+    ports:
+      - 5432:5432
+
+  cs_be:
+    build:
+      context: .
+      dockerfile: ./build/compose/develop/backend/Dockerfile
+    image: codescript:backend
+    depends_on:
+      - cs_db
+    volumes:
+      - ./src/backend/:/app
+    env_file:
+      - ./build/environments/develop/database
+      - ./build/environments/develop/backend
+    ports:
+      - 8000:8000
