@@ -1,3 +1,4 @@
 # { CodeVendor }
 
-Private vendor for second life that allow public stores and sell products.
+Software for public stores and manage them.
+Is a private software for a virtual plattform Second Life.
